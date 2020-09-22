@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Covid19 Status</title>
+    <link href="../static/css/main.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-4.3.1-dist/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/js/angular.min.js"></script>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap-4.3.1-dist/bootstrap.min.js"></script>
+    <script src="../static/js/app.js?2"></script>
+
+</head>
+
+<body ng-app="myApp" ng-controller="HomeCtrl">
+    <wrapper class="d-flex flex-column">
+        <div class="covid-header text-white">Header</div>
+        <main class="container-fluid py-3 flex-fill covid-main-body">
+            <div class="h4 mb-4 p-1 text-center text-white">תמונת מצב קורונה</div>
+            <div class="container-fluid py-3 flex-fill">
+                <div class="row">
+                    <div class="col box card text-white">
+                        מבודדים
+                    </div>
+                    <div class="col box card text-white">
+                        חולים פעילים
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col box card text-white">
+                        סה"כ נפטרים
+                    </div>
+                    <div class="col box card text-white">
+                        סה"כ מחלימים
+                    </div>
+                    <div class="col box card text-white">
+                        בדיקות יומיות
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        <footer class="container-fluid w-100 text-light py-1 covid-footer">
+            <div class="covid-footer">
+                <p>© 2020 Copyright </p>
+            </div>
+        </footer>
+    </wrapper>
+</body>
+
+</html>
