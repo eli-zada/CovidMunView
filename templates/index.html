@@ -4,39 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Covid19 Status</title>
-    <link href="../static/css/main.css" rel="stylesheet">
-    <link href="../static/css/bootstrap-4.3.1-dist/bootstrap.min.css" rel="stylesheet">
-    <script src="../static/js/angular.min.js"></script>
+    <link href="../static1/css/main.css" rel="stylesheet">
+    <link href="../static1/css/bootstrap-4.3.1-dist/bootstrap.min.css" rel="stylesheet">
+    <script src="../static1/js/angular.min.js"></script>
     <link rel="shortcut icon" href="../static/favicon.ico">
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/bootstrap-4.3.1-dist/bootstrap.min.js"></script>
-    <script src="../static/js/app.js?2"></script>
+    <script src="../static1/js/jquery.min.js"></script>
+    <script src="../static1/js/bootstrap-4.3.1-dist/bootstrap.min.js"></script>
+    <script src="../static1/js/app.js"></script>
 
 </head>
 
 <body ng-app="myApp" ng-controller="HomeCtrl">
     <wrapper class="d-flex flex-column">
-        <div class="covid-header text-white">Header</div>
+        <div class="covid-header text-white">{{ date }}</div>
         <main class="container-fluid py-3 flex-fill covid-main-body">
-            <div class="h4 mb-4 p-1 text-center text-white">תמונת מצב קורונה</div>
+            <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
+            <div class="h4 mb-4 p-1 text-center text-white">תמונת מצב קורונה - {{ city }}</div>
             <div class="container-fluid py-3 flex-fill">
                 <div class="row">
                     <div class="col box card text-white">
-                        מבודדים
+                        מבודדים <br>{{ covid.hospitalized }}
                     </div>
                     <div class="col box card text-white">
-                        חולים פעילים
+                        חולים פעילים<br> {{ covid.cases }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col box card text-white">
-                        סה"כ נפטרים
+                        סה"כ נפטרים<br> {{ covid.deaths }}
                     </div>
                     <div class="col box card text-white">
-                        סה"כ מחלימים
+                        סה"כ מחלימים<br> {{ covid.recoveries }}
                     </div>
                     <div class="col box card text-white">
-                        בדיקות יומיות
+                        בדיקות יומיות<br> {{ covid.tested }}
                     </div>
                 </div>
             </div>
