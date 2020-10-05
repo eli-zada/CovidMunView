@@ -82,6 +82,7 @@ wrapper {
 
 .covid-filters {
     text-align: right;
+    font-size: 14px;
 }
 
 .covid-filters>div {
