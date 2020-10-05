@@ -16,6 +16,11 @@
     <script src="../static1/js/bootstrap-4.3.1-dist/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+
+    <!-- ui-select files -->
+    <script src="../static1/js/select.js"></script>
+    <link rel="stylesheet" href="../static1/css/select.css">
 
     <script src="../static1/js/app.js"></script>
 
@@ -29,36 +34,25 @@
         <main class="container-fluid py-3 flex-fill covid-main-body">
             <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
             <div class="covid-filters">
-                <div class="dropdown dropdown-scroll">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">{{ citySelected.name }} 
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation">
-                            <div class="input-group input-group-sm search-control"> <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </span>
-                                <input type="text" class="form-control" placeholder="חפש עיר" ng-model="queryCity"></input>
-                            </div>
-                        </li>
-                        <li role="presentation" ng-repeat='item in cities | filter:queryCity' ng-click="cityChanged(item)"> <a href="#"> {{item.name}} </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dropdown dropdown-scroll">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">{{agasSelected}} 
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                        <li role="presentation">
-                            <div class="input-group input-group-sm search-control"> <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </span>
-                                <input type="text" class="form-control" placeholder="שכונה" ng-model="query"></input>
-                            </div>
-                        </li>
-                        <li role="presentation" ng-repeat='item in agasFiltered | filter:query' ng-click="agasChanged(item)"> <a href="#"> {{item.districts}} </a>
-                        </li>
-                    </ul>
-                </div>
+
+
+
+                <ui-select ng-model="agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
+                    <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
+                    <ui-select-choices repeat="agas in agasFiltered | filter: {districts: $select.search}">
+                        <div ng-bind-html="agas.districts | highlight: $select.search"></div>
+
+                    </ui-select-choices>
+                </ui-select>
+
+                <ui-select ng-model="citySelected" on-select="cityChanged($item)" theme="select2" style="min-width: 300px;" title="בחר עיר">
+                    <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש עיר">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="city in cities | filter: {name: $select.search}">
+                        <div ng-bind-html="city.name | highlight: $select.search"></div>
+
+                    </ui-select-choices>
+                </ui-select>
+
                 <div>
 
                 </div>

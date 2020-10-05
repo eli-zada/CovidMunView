@@ -1,4 +1,4 @@
- angular.module('myApp', ['ngSanitize'])
+ angular.module('myApp', ['ngSanitize', 'ui.select'])
      .controller('HomeCtrl', function($scope, $http, $q) {
          $scope.covids = [];
          $scope.covid = ['11121', '222'];
@@ -37,6 +37,7 @@
 
          $scope.cityChanged = function(city) {
              $scope.citySelected = city;
+             $scope.agasSelected = {};
              $scope.getdata();
          }
 
