@@ -7,7 +7,7 @@
          $scope.citySelected = { "code": 3000, "name": "ירושלים" };
          $scope.agas = [];
          $scope.agasFiltered = [];
-         $scope.agasSelected = '';
+         $scope.agasSelected = { "agas_code": "all" };
          $scope.dataLoading = false;
          $scope.currentDate = new Date();
 
@@ -37,12 +37,18 @@
 
          $scope.cityChanged = function(city) {
              $scope.citySelected = city;
-             $scope.agasSelected = {};
+             $scope.agasSelected = { "agas_code": "all" };
              $scope.getdata();
          }
 
          $scope.agasChanged = function(agas) {
-             $scope.getdata();
+             if (!agas) {
+                 agas = { "agas_code": "all" };
+             }
+
+             $scope.agasSelected = agas;
+             console.log($scope.covid[agas.agas_code]);
+
          }
 
          $scope.initEntites = function() {
@@ -70,7 +76,6 @@
                  if (itm.city_code == citycode)
                      return itm;
              });
-             console.log($scope.agasFiltered);
 
          };
 
@@ -88,7 +93,7 @@
              $scope.covid['all'].tested = 0;
 
              covidArr.forEach(covidObj => {
-                 _neibor = covidObj.agas + ' - ' + covidObj.agas_code;
+                 _neibor = covidObj.agas_code;
                  if (!(_neibor in $scope.covid)) {
                      $scope.covid[_neibor] = {};
                      $scope.covid[_neibor].hospitalized = 0;

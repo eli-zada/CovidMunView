@@ -38,7 +38,7 @@
 
 
                 <ui-select ng-model="agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
-                    <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
+                    <ui-select-match allow-clear="true" placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
                     <ui-select-choices repeat="agas in agasFiltered | filter: {districts: $select.search}">
                         <div ng-bind-html="agas.districts | highlight: $select.search"></div>
 
@@ -63,21 +63,21 @@
             <div class="container-fluid py-3 flex-fill">
                 <div class="row">
                     <div class="col box card text-white">
-                        מבודדים <br>{{ covid['all'].hospitalized }}
+                        מבודדים <br>{{ covid[agasSelected.agas_code].hospitalized }}
                     </div>
                     <div class="col box card text-white">
-                        חולים פעילים<br> {{ covid['all'].cases }}
+                        חולים פעילים<br> {{ covid[agasSelected.agas_code].cases }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col box card text-white">
-                        סה"כ נפטרים<br> {{ covid['all'].deaths }}
+                        סה"כ נפטרים<br> {{ covid[agasSelected.agas_code].deaths }}
                     </div>
                     <div class="col box card text-white">
-                        סה"כ מחלימים<br> {{ covid['all'].recoveries }}
+                        סה"כ מחלימים<br> {{ covid[agasSelected.agas_code].recoveries }}
                     </div>
                     <div class="col box card text-white">
-                        בדיקות יומיות<br> {{ covid['all'].tested }}
+                        בדיקות יומיות<br> {{ covid[agasSelected.agas_code].tested }}
                     </div>
                 </div>
             </div>
