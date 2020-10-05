@@ -6,38 +6,84 @@
     <title>Covid19 Status</title>
     <link href="../static1/css/main.css" rel="stylesheet">
     <link href="../static1/css/bootstrap-4.3.1-dist/bootstrap.min.css" rel="stylesheet">
+
+    <script data-require="jquery@*" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="../static1/js/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-sanitize.js"></script>
     <link rel="shortcut icon" href="../static/favicon.ico">
     <script src="../static1/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="../static1/js/bootstrap-4.3.1-dist/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+
     <script src="../static1/js/app.js"></script>
 
 </head>
 
 <body ng-app="myApp" ng-controller="HomeCtrl">
     <wrapper class="d-flex flex-column">
-        <div class="covid-header text-white">{{ date }}</div>
+        <div class="covid-header text-white">
+            <div style="padding: 10px;">{{ currentDate | date:'dd/MM/yyyy' }}</div>
+        </div>
         <main class="container-fluid py-3 flex-fill covid-main-body">
             <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
-            <div class="h4 mb-4 p-1 text-center text-white">תמונת מצב קורונה - {{ city }}</div>
+            <div class="covid-filters">
+                <div class="dropdown dropdown-scroll">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">{{ citySelected.name }} 
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation">
+                            <div class="input-group input-group-sm search-control"> <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input type="text" class="form-control" placeholder="חפש עיר" ng-model="queryCity"></input>
+                            </div>
+                        </li>
+                        <li role="presentation" ng-repeat='item in cities | filter:queryCity' ng-click="cityChanged(item)"> <a href="#"> {{item.name}} </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dropdown dropdown-scroll">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">{{agasSelected}} 
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                        <li role="presentation">
+                            <div class="input-group input-group-sm search-control"> <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input type="text" class="form-control" placeholder="שכונה" ng-model="query"></input>
+                            </div>
+                        </li>
+                        <li role="presentation" ng-repeat='item in agasFiltered | filter:query' ng-click="agasChanged(item)"> <a href="#"> {{item.districts}} </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+
+                </div>
+
+            </div>
+            <div class="h4 text-center text-white" style="margin-bottom: 0px;">תמונת מצב קורונה - {{ city }}</div>
+            <div class="h6 mb-4 p-1 text-center text-white">נכון ל - {{ date }}</div>
             <div class="container-fluid py-3 flex-fill">
                 <div class="row">
                     <div class="col box card text-white">
-                        מבודדים <br>{{ covid.hospitalized }}
+                        מבודדים <br>{{ covid['all'].hospitalized }}
                     </div>
                     <div class="col box card text-white">
-                        חולים פעילים<br> {{ covid.cases }}
+                        חולים פעילים<br> {{ covid['all'].cases }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col box card text-white">
-                        סה"כ נפטרים<br> {{ covid.deaths }}
+                        סה"כ נפטרים<br> {{ covid['all'].deaths }}
                     </div>
                     <div class="col box card text-white">
-                        סה"כ מחלימים<br> {{ covid.recoveries }}
+                        סה"כ מחלימים<br> {{ covid['all'].recoveries }}
                     </div>
                     <div class="col box card text-white">
-                        בדיקות יומיות<br> {{ covid.tested }}
+                        בדיקות יומיות<br> {{ covid['all'].tested }}
                     </div>
                 </div>
             </div>
@@ -49,6 +95,11 @@
             </div>
         </footer>
     </wrapper>
+    <script>
+        $('.dropdown-menu').find('input').click(function(e) {
+            e.stopPropagation();
+        });
+    </script>
 </body>
 
 </html>

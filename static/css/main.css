@@ -71,3 +71,59 @@ wrapper {
 .covid-footer {
     background-color: #240457;
 }
+
+.bootstrap-select.btn-group .btn .filter-option {
+    text-align: right
+}
+
+.selectpicker {
+    text-align-last: right;
+}
+
+.covid-filters {
+    text-align: right;
+}
+
+.covid-filters>div {
+    margin-bottom: 10px;
+}
+
+.typeahead-demo .custom-popup-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    background-color: #f9f9f9;
+}
+
+.typeahead-demo .custom-popup-wrapper>.message {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    color: #868686;
+}
+
+.typeahead-demo .custom-popup-wrapper>.dropdown-menu {
+    position: static;
+    float: none;
+    display: block;
+    min-width: 160px;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.dropdown.dropdown-scroll .dropdown-menu {
+    max-height: 200px;
+    width: 60px;
+    overflow: auto;
+}
+
+.search-control {
+    padding: 5px 10px;
+}
+
+.dropdown-menu>li>a {
+    text-align: right;
+}
