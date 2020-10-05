@@ -34,9 +34,6 @@
         <main class="container-fluid py-3 flex-fill covid-main-body">
             <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
             <div class="covid-filters">
-
-
-
                 <ui-select ng-model="agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
                     <ui-select-match allow-clear="true" placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
                     <ui-select-choices repeat="agas in agasFiltered | filter: {districts: $select.search}">
