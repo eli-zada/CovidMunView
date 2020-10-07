@@ -47,6 +47,7 @@
 
              $scope.agasSelected = agas;
              $scope.agas_name = agas.districts;
+             $scope.agas_streets = agas.main_streets;
              console.log($scope.covid[agas.agas_code]);
 
          }
@@ -83,7 +84,8 @@
              //$scope.covid = [];
              $scope.covid.length = 0;
              $scope.city = covidArr[0].city;
-             $scope.agas_name = covidArr[0].agas;
+             $scope.agas_name = covidArr[0].agas.districts;
+             $scope.agas_streets = covidArr[0].agas.main_streets;
              $scope.date = covidArr[0].date;
 
              $scope.covid['all'] = {};
