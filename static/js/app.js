@@ -3,22 +3,25 @@
          $scope.covids = [];
          $scope.covid = [];
          $scope.cities = [];
-         $scope.citySelected = { "code": 3000, "name": "ירושלים" };
+         $scope.model = {};
+         $scope.model.citySelected = { "code": 3000, "name": "ירושלים" };
+         $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
          $scope.agas = [];
          $scope.agasFiltered = [];
-         $scope.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
          $scope.dataLoading = false;
 
          $scope.getdata = function() {
              let deferred = $q.defer();
              $scope.error = '';
              $scope.dataLoading = true;
-             $http.get('http://covid.moshe742.name/api/' + $scope.citySelected.code + '/')
+             $http.get('http://covid.moshe742.name/api/' + $scope.model.citySelected.code + '/')
                  .then(function(data) {
                      deferred.resolve(data);
                      $scope.covids = data.data;
                      $scope.proccessData($scope.covids, $scope);
-                     $scope.filterAgas($scope.citySelected.code);
+                     $scope.filterAgas($scope.model.citySelected.code);
+                     $scope.model.agasSelected = $scope.agasFiltered[0];
+                     console.log('getdata ', $scope.model.agasSelected);
                      $scope.errorMsg = '';
                  }, function(response) {
                      // Second function handles error
@@ -30,20 +33,15 @@
                      console.error(response);
                      deferred.reject('Failure');
                  });
-
+             return deferred.promise
          };
 
          $scope.cityChanged = function(city) {
-             $scope.citySelected = city;
-             $scope.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
+             $scope.model.citySelected = city;
              $scope.getdata();
          }
 
          $scope.agasChanged = function(agas) {
-             if (!agas) {
-                 agas = { "districts": "מרכז העיר", "agas_code": 842 };
-             }
-
              $scope.agasSelected = agas;
              $scope.agas_name = agas.districts;
              console.log($scope.covid[agas.agas_code]);
@@ -58,8 +56,17 @@
              $q.all([cities_api, agas_api]).then(data => {
                      $scope.cities = data[0].data;
                      $scope.agas = data[1].data;
-                     $scope.cityChanged({ "code": 3000, "name": "ירושלים" });
+                     $scope.model.citySelected = { "code": 3000, "name": "ירושלים" };
+                     $scope.getdata().then(function(data) {
+                         $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
+                         console.log('init ', $scope.model.agasSelected);
+                     }, function(error) {
+                         console.error(data);
+                     });
+
                      console.log('init cities and agas', data);
+
+
                  })
                  .catch(function(e) {
                      $scope.dataLoading = false;
@@ -75,7 +82,6 @@
                  if (itm.city_code == citycode)
                      return itm;
              });
-
          };
 
          $scope.proccessData = function(covidArr, $scope) {

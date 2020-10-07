@@ -34,7 +34,7 @@
             <div class="title"></div>​
             <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
             <div class="covid-filters">
-                <ui-select ng-model="citySelected" on-select="cityChanged($item)" theme="select2" style="min-width: 300px;" title="בחר עיר">
+                <ui-select ng-model="model.citySelected" on-select="cityChanged($item)" theme="select2" style="min-width: 300px;" title="בחר עיר">
                     <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש עיר">{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="city in cities | filter: {name: $select.search}">
                         <div ng-bind-html="city.name | highlight: $select.search"></div>
@@ -42,7 +42,7 @@
                     </ui-select-choices>
                 </ui-select>
 
-                <ui-select ng-model="agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
+                <ui-select ng-model="model.agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
                     <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
                     <ui-select-choices repeat="agas in agasFiltered | propsFilter: {districts: $select.search,main_streets: $select.search }">
                         <div ng-bind-html="agas.districts | highlight: $select.search"></div>
@@ -58,7 +58,7 @@
                 </div>
 
             </div>
-            <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ city }}, {{ agasSelected.districts }}</div>
+            <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }}</div>
             <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date }}</div>
             <div class="results-table">
                 <div class="row results-table-row">
