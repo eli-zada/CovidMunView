@@ -92,9 +92,7 @@ wrapper {
 .covid-filters {
     text-align: center;
     font-size: 14px;
-}
-
-.covid-filters> {
+    direction: rtl;
     margin-bottom: 10px;
 }
 
@@ -102,6 +100,7 @@ wrapper {
     color: rgb(192,90,17);
     font-weight: bold;
     font-family: "Guttman Haim";
+    direction: rtl;
 }
 
 .results-table {

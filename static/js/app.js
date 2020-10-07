@@ -46,14 +46,7 @@
              }
 
              $scope.agasSelected = agas;
-             if (agas.districts == undefined)
-             {
-                $scope.agas_name = "zada";
-             }
-             else
-             {
-                $scope.agas_name = agas.districts;
-             }
+             $scope.agas_name = agas.districts;
              console.log($scope.covid[agas.agas_code]);
 
          }

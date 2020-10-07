@@ -34,18 +34,18 @@
             <div class="title"></div>​
             <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
             <div class="covid-filters">
-                <ui-select ng-model="agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
-                    <ui-select-match allow-clear="true" placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
-                    <ui-select-choices repeat="agas in agasFiltered | filter: {districts: $select.search}">
-                        <div ng-bind-html="agas.districts | highlight: $select.search"></div>
-
-                    </ui-select-choices>
-                </ui-select>
-
                 <ui-select ng-model="citySelected" on-select="cityChanged($item)" theme="select2" style="min-width: 300px;" title="בחר עיר">
                     <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש עיר">{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="city in cities | filter: {name: $select.search}">
                         <div ng-bind-html="city.name | highlight: $select.search"></div>
+
+                    </ui-select-choices>
+                </ui-select>
+
+                <ui-select ng-model="agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
+                    <ui-select-match allow-clear="true" placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
+                    <ui-select-choices repeat="agas in agasFiltered | filter: {districts: $select.search}">
+                        <div ng-bind-html="agas.districts | highlight: $select.search"></div>
 
                     </ui-select-choices>
                 </ui-select>
