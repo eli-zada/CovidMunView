@@ -1,13 +1,12 @@
  angular.module('myApp', ['ngSanitize', 'ui.select'])
      .controller('HomeCtrl', function($scope, $http, $q) {
          $scope.covids = [];
-         $scope.covid = ['11121', '222'];
-         $scope.covids111 = ['1111', '222'];
+         $scope.covid = [];
          $scope.cities = [];
          $scope.citySelected = { "code": 3000, "name": "ירושלים" };
          $scope.agas = [];
          $scope.agasFiltered = [];
-         $scope.agasSelected = {"districts":"מרכז העיר", "agas_code":842,"city_code":3000,"city":"ירושלים"};
+         $scope.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
          $scope.dataLoading = false;
 
          $scope.getdata = function() {
@@ -36,18 +35,17 @@
 
          $scope.cityChanged = function(city) {
              $scope.citySelected = city;
-             $scope.agasSelected = { "agas_code": "all" };
+             $scope.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
              $scope.getdata();
          }
 
          $scope.agasChanged = function(agas) {
              if (!agas) {
-                 agas = { "agas_code": "all" };
+                 agas = { "districts": "מרכז העיר", "agas_code": 842 };
              }
 
              $scope.agasSelected = agas;
              $scope.agas_name = agas.districts;
-             $scope.agas_streets = agas.main_streets;
              console.log($scope.covid[agas.agas_code]);
 
          }
@@ -84,8 +82,7 @@
              //$scope.covid = [];
              $scope.covid.length = 0;
              $scope.city = covidArr[0].city;
-             $scope.agas_name = covidArr[0].agas.districts;
-             $scope.agas_streets = covidArr[0].agas.main_streets;
+             $scope.agas_name = covidArr[0].agas;
              $scope.date = covidArr[0].date;
 
              $scope.covid['all'] = {};
@@ -131,6 +128,43 @@
 
          };
 
+
          $scope.initEntites();
 
+     })
+     /**
+      * AngularJS default filter with the following expression:
+      * "person in people | filter: {name: $select.search, age: $select.search}"
+      * performs a AND between 'name: $select.search' and 'age: $select.search'.
+      * We want to perform a OR.
+      */
+     .filter('propsFilter', function() {
+         return function(items, props) {
+             var out = [];
+
+             if (angular.isArray(items)) {
+                 items.forEach(function(item) {
+                     var itemMatches = false;
+
+                     var keys = Object.keys(props);
+                     for (var i = 0; i < keys.length; i++) {
+                         var prop = keys[i];
+                         var text = props[prop].toLowerCase();
+                         if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                             itemMatches = true;
+                             break;
+                         }
+                     }
+
+                     if (itemMatches) {
+                         out.push(item);
+                     }
+                 });
+             } else {
+                 // Let the output be the input untouched
+                 out = items;
+             }
+
+             return out;
+         }
      });
