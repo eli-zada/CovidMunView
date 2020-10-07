@@ -7,9 +7,8 @@
          $scope.citySelected = { "code": 3000, "name": "ירושלים" };
          $scope.agas = [];
          $scope.agasFiltered = [];
-         $scope.agasSelected = { "agas_code": "all" };
+         $scope.agasSelected = {"districts":"מרכז העיר", "agas_code":842,"city_code":3000,"city":"ירושלים"};
          $scope.dataLoading = false;
-         $scope.currentDate = new Date();
 
          $scope.getdata = function() {
              let deferred = $q.defer();
@@ -47,6 +46,14 @@
              }
 
              $scope.agasSelected = agas;
+             if (agas.districts == undefined)
+             {
+                $scope.agas_name = "zada";
+             }
+             else
+             {
+                $scope.agas_name = agas.districts;
+             }
              console.log($scope.covid[agas.agas_code]);
 
          }
@@ -83,6 +90,7 @@
              //$scope.covid = [];
              $scope.covid.length = 0;
              $scope.city = covidArr[0].city;
+             $scope.agas_name = covidArr[0].agas;
              $scope.date = covidArr[0].date;
 
              $scope.covid['all'] = {};

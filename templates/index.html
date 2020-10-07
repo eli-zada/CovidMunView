@@ -31,6 +31,7 @@
             <div style="padding: 10px;">{{ currentDate | date:'dd/MM/yyyy' }}</div>
         </div>
         <main class="container-fluid py-3 flex-fill covid-main-body">
+            <div class="title"></div>​
             <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
             <div class="covid-filters">
                 <ui-select ng-model="agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
@@ -54,34 +55,42 @@
                 </div>
 
             </div>
-            <div class="h4 text-center text-white" style="margin-bottom: 0px;">תמונת מצב קורונה - {{ city }}</div>
-            <div class="h6 mb-4 p-1 text-center text-white">נכון ל - {{ date }}</div>
-            <div class="container-fluid py-3 flex-fill">
-                <div class="row">
-                    <div class="col box card text-white">
-                        מבודדים <br>{{ covid[agasSelected.agas_code].hospitalized }}
+            <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ city }}, {{ agas_name }}</div>
+            <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date }}</div>
+            <div class="results-table">
+                <div class="row results-table-row">
+                    <div class="box results-table-cell">
+                        <div class="results-table-result">{{ covid[agasSelected.agas_code].hospitalized }}</div>
+                        <div class="results-table-result-title">מבודדים</div>
                     </div>
-                    <div class="col box card text-white">
-                        חולים פעילים<br> {{ covid[agasSelected.agas_code].cases }}
+                    <div class="box results-table-cell">
+                        <div class="results-table-result">{{ covid[agasSelected.agas_code].cases }}</div>
+                        <div class="results-table-result-title">חולים פעילים</div>
+                    </div>
+                    <div class="box results-table-cell">
+                        <div class="results-table-result">{{ covid[agasSelected.agas_code].tested }}</div>
+                        <div class="results-table-result-title">בדיקות יומיות</div>
                     </div>
                 </div>
+            </div>
+            <div class="results-table">
                 <div class="row">
-                    <div class="col box card text-white">
-                        סה"כ נפטרים<br> {{ covid[agasSelected.agas_code].deaths }}
+                    <div class="box results-table-cell">
+                        <div class="results-table-result">{{ covid[agasSelected.agas_code].deaths }}</div>
+                        <div class="results-table-result-title">סה"כ נפטרים</div>
                     </div>
-                    <div class="col box card text-white">
-                        סה"כ מחלימים<br> {{ covid[agasSelected.agas_code].recoveries }}
+                    <div class="box results-table-cell">
+                        <div class="results-table-result">{{ covid[agasSelected.agas_code].recoveries }}</div>
+                        <div class="results-table-result-title">סה"כ מחלימים</div>
                     </div>
-                    <div class="col box card text-white">
-                        בדיקות יומיות<br> {{ covid[agasSelected.agas_code].tested }}
-                    </div>
+
                 </div>
             </div>
 
         </main>
-        <footer class="container-fluid w-100 text-light py-1 covid-footer">
+        <footer class="container-fluid w-100 text-black-50 py-1 covid-footer text-right">
             <div class="covid-footer">
-                <p>© 2020 Copyright </p>
+                <p>פותח על ידי חברי קהילת Python Israel בפייסבוק ובשיתוף עיריית ראש העין ומשרד הבריאות [לינק]</p>
             </div>
         </footer>
     </wrapper>

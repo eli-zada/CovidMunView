@@ -49,14 +49,14 @@
 }
 
 .covid-main-body {
-    background-color: #4E25AF;
+    background-color: rgb(242, 242, 242);
 }
 
 .box {
     margin: 5px;
     height: 70px;
     text-align: center;
-    background-color: #713FD4 !important;
+    background-color: rgb(242, 242, 242) !important;
 }
 
 body,
@@ -65,11 +65,20 @@ wrapper {
 }
 
 .covid-header {
-    background-color: #240457;
+    background-color: rgb(242, 242, 242);
+}
+
+.title {
+    height: 40%;
+    width: 40%;
+    content: url("../images/title.png");
+    margin: auto;
 }
 
 .covid-footer {
-    background-color: #240457;
+    background-color: rgb(242, 242, 242);
+    text-align: center;
+    direction: rtl;
 }
 
 .bootstrap-select.btn-group .btn .filter-option {
@@ -81,12 +90,47 @@ wrapper {
 }
 
 .covid-filters {
-    text-align: right;
+    text-align: center;
     font-size: 14px;
 }
 
-.covid-filters>div {
+.covid-filters> {
     margin-bottom: 10px;
+}
+
+.filered-title {
+    color: rgb(192,90,17);
+    font-weight: bold;
+    font-family: "Guttman Haim";
+}
+
+.results-table {
+    display: flex;
+    justify-content: center;
+}
+
+.results-table-row {
+    border-color: rgb(68, 114, 196);
+}
+
+.results-table-cell {
+    border-top-right-radius:15px;
+    border-top-left-radius:15px;
+    border-bottom-right-radius:15px;
+    border-bottom-left-radius:15px;
+    border-color: rgb(68, 114, 196);
+    border-style:solid;
+    border-width:5px;
+    color: black;
+    width: 200px;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.results-table-result {
+    color: black;
+    font-size: 40px;
+    font-weight: bolder;
 }
 
 .typeahead-demo .custom-popup-wrapper {
