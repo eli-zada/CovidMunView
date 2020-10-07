@@ -186,15 +186,15 @@
             <div class="results-table">
                 <div class="row results-table-row">
                     <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[agasSelected.agas_code].hospitalized }}</div>
+                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].hospitalized }}</div>
                         <div class="results-table-result-title">מבודדים</div>
                     </div>
                     <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[agasSelected.agas_code].cases }}</div>
+                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].cases }}</div>
                         <div class="results-table-result-title">חולים פעילים</div>
                     </div>
                     <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[agasSelected.agas_code].tested }}</div>
+                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].tested }}</div>
                         <div class="results-table-result-title">בדיקות יומיות</div>
                     </div>
                 </div>
@@ -202,11 +202,11 @@
             <div class="results-table">
                 <div class="row">
                     <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[agasSelected.agas_code].deaths }}</div>
+                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].deaths }}</div>
                         <div class="results-table-result-title">סה"כ נפטרים</div>
                     </div>
                     <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[agasSelected.agas_code].recoveries }}</div>
+                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].recoveries }}</div>
                         <div class="results-table-result-title">סה"כ מחלימים</div>
                     </div>
 
@@ -242,18 +242,18 @@
 
         // When the user clicks on the button, open the modal
         btn.onclick = function() {
-            modal.style.display = "block";
+            model.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
-            modal.style.display = "none";
+            model.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
-                modal.style.display = "none";
+                model.style.display = "none";
             }
         }
     </script>

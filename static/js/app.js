@@ -42,7 +42,7 @@
          }
 
          $scope.agasChanged = function(agas) {
-             $scope.agasSelected = agas;
+             $scope.model.agasSelected = agas;
              $scope.agas_name = agas.districts;
              console.log($scope.covid[agas.agas_code]);
 
