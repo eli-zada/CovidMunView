@@ -84,6 +84,16 @@
              });
          };
 
+         $scope.checkValue = function(value) {
+             if ( value == -1 ) {
+                 return "<15";
+             }
+             else 
+             {
+                 return value;
+             }
+         }
+
          $scope.proccessData = function(covidArr, $scope) {
              //$scope.covid = [];
              $scope.covid.length = 0;
@@ -108,24 +118,27 @@
                      $scope.covid[_neibor].deaths = 0;
                      $scope.covid[_neibor].tested = 0;
                  }
+                $scope.covid[_neibor].hospitalized  = $scope.checkValue(covidObj.accumulated_hospitalized);
+                $scope.covid[_neibor].cases         = $scope.checkValue(covidObj.accumulated_cases);
+                $scope.covid[_neibor].recoveries    = $scope.checkValue(covidObj.accumulated_recoveries);
+                $scope.covid[_neibor].deaths        = $scope.checkValue(covidObj.accumulated_deaths);
+                $scope.covid[_neibor].tested        = $scope.checkValue(covidObj.accumulated_tested);
                  if (covidObj.accumulated_hospitalized > -1) {
-                     $scope.covid[_neibor].hospitalized += covidObj.accumulated_hospitalized;
                      $scope.covid['all'].hospitalized += covidObj.accumulated_hospitalized;
                  };
                  if (covidObj.accumulated_cases > -1) {
-                     $scope.covid[_neibor].cases += covidObj.accumulated_cases;
+                     
                      $scope.covid['all'].cases += covidObj.accumulated_cases;
                  };
                  if (covidObj.accumulated_recoveries > -1) {
-                     $scope.covid[_neibor].recoveries += covidObj.accumulated_recoveries;
+            
                      $scope.covid['all'].recoveries += covidObj.accumulated_recoveries;
                  };
                  if (covidObj.accumulated_deaths > -1) {
-                     $scope.covid[_neibor].deaths += covidObj.accumulated_deaths;
                      $scope.covid['all'].deaths += covidObj.accumulated_deaths;
                  };
                  if (covidObj.accumulated_tested > -1) {
-                     $scope.covid[_neibor].tested += covidObj.accumulated_tested;
+
                      $scope.covid['all'].tested += covidObj.accumulated_tested;
                  };
 
