@@ -98,11 +98,7 @@
          };
 
          $scope.checkValue = function(value) {
-             if (value == -1) {
-                 return "<15";
-             } else {
-                 return value;
-             }
+             return value == -1 ? "<15" : value;
          }
 
          $scope.proccessData = function(covidArr, $scope) {
