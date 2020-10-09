@@ -1,5 +1,5 @@
  angular.module('myApp', ['ngSanitize', 'ui.select', 'n3-line-chart'])
-     .controller('HomeCtrl', function($scope, covidgraph, RestService) {
+     .controller('HomeCtrl', function($scope, $http, $q, covidgraph, RestService) {
          $scope.covids = [];
          $scope.covid = [];
          $scope.cities = [];
