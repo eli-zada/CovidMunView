@@ -235,3 +235,13 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+.my-chart {
+    height: 300px;
+}
+
+.graph-hidden {
+    visibility: hidden !important;
+    position: absolute !important;
+    top: 0 !important;
+}

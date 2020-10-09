@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/line-chart/2.0.9/LineChart.min.js" integrity="sha512-41JdPRcZSEb5KDKolNHn1KXftlqqGqZHyCACkKA5Fyksby3Mz2vG6QbxCe3DnCy8cSeYXKCAMwYtZZM5TvBlpQ==" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="../static/favicon.ico">
     <script src="../static1/js/jquery.min.js"></script>
+    <script src="../static1/js/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="../static1/js/bootstrap-4.3.1-dist/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
@@ -27,6 +28,7 @@
 
     <script>
         document.write('<script src="../static1/js/app.js?ver=' + Math.floor(Math.random() * 100) + '"\><\/script>');
+        document.write('<script src="../static1/js/factories.js?ver=' + Math.floor(Math.random() * 100) + '"\><\/script>');
     </script>
 
     <!-- The Modal -->
@@ -117,43 +119,54 @@
                     </ui-select-choices>
                 </ui-select>
 
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".collapse" aria-expanded="true" aria-controls="#result-tables" ng-click="hideGraph = !hideGraph">
+                    גרף
+                  </button>
+
                 <div>
 
                 </div>
 
             </div>
             <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }}</div>
-            <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date }}</div>
-            <div class="results-table">
-                <div class="row results-table-row">
-                    <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].hospitalized }}</div>
-                        <div class="results-table-result-title">מבודדים</div>
-                    </div>
-                    <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].cases }}</div>
-                        <div class="results-table-result-title">חולים פעילים</div>
-                    </div>
-                    <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].tested }}</div>
-                        <div class="results-table-result-title">בדיקות יומיות</div>
+            <div id="result-tables" class="collapse show">
+                <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date }}</div>
+                <div class="results-table">
+                    <div class="row results-table-row">
+                        <div class="box results-table-cell">
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].hospitalized }}</div>
+                            <div class="results-table-result-title">מבודדים</div>
+                        </div>
+                        <div class="box results-table-cell">
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].cases }}</div>
+                            <div class="results-table-result-title">חולים פעילים</div>
+                        </div>
+                        <div class="box results-table-cell">
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].tested }}</div>
+                            <div class="results-table-result-title">בדיקות יומיות</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="results-table">
-                <div class="row">
-                    <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].deaths }}</div>
-                        <div class="results-table-result-title">סה"כ נפטרים</div>
-                    </div>
-                    <div class="box results-table-cell">
-                        <div class="results-table-result">{{ covid[model.agasSelected.agas_code].recoveries }}</div>
-                        <div class="results-table-result-title">סה"כ מחלימים</div>
+                <div class="results-table">
+                    <div class="row">
+                        <div class="box results-table-cell">
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].deaths }}</div>
+                            <div class="results-table-result-title">סה"כ נפטרים</div>
+                        </div>
+                        <div class="box results-table-cell">
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].recoveries }}</div>
+                            <div class="results-table-result-title">סה"כ מחלימים</div>
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
+
+            <div class="my-chart" ng-class="{'graph-hidden' : hideGraph}">
+                <linechart data="graphData[model.agasSelected.agas_code]" options="options"></linechart>
+            </div>
+
 
 
         </main>
