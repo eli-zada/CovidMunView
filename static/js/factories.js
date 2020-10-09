@@ -11,6 +11,14 @@ angular.module('myApp')
             return $http.get(urlBase + cityId + '/' + fromDate + '/' + toDate + '/');
         };
 
+        service.getAgas = function() {
+            return $http.get(urlBase + "agas_list/");
+        };
+
+        service.getCities = function() {
+            return $http.get(urlBase + "city_list/");
+        };
+
         return service;
     })
     .factory('covidgraph', ['RestService', function(RestService) {
@@ -41,8 +49,8 @@ angular.module('myApp')
                 }
                 _obj = {
                     "x": new Date(moment(covidObj.date, "DD/MM/YY").format("MM/DD/YY")),
-                    "case01": covidObj.accumulated_cases,
-                    "recover01": covidObj.accumulated_recoveries
+                    "case01": covidObj.accumulated_cases == -1 ? 0 : covidObj.accumulated_cases,
+                    "recover01": covidObj.accumulated_recoveries == -1 ? 0 : covidObj.accumulated_recoveries
                 };
                 _graphData[_neibor].dataset.push(_obj);
 

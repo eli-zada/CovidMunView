@@ -1,5 +1,5 @@
  angular.module('myApp', ['ngSanitize', 'ui.select', 'n3-line-chart'])
-     .controller('HomeCtrl', function($scope, $http, $q, covidgraph, RestService) {
+     .controller('HomeCtrl', function($scope, $q, covidgraph, RestService) {
          $scope.covids = [];
          $scope.covid = [];
          $scope.cities = [];
@@ -62,8 +62,8 @@
          $scope.initEntites = function() {
              $scope.error = '';
              $scope.dataLoading = true;
-             let agas_api = $http.get('http://covid.moshe742.name/api/agas_list/');
-             let cities_api = $http.get('http://covid.moshe742.name/api/city_list/');
+             let agas_api = RestService.getAgas();
+             let cities_api = RestService.getCities();
              $q.all([cities_api, agas_api]).then(data => {
                      $scope.cities = data[0].data;
                      $scope.agas = data[1].data;
@@ -74,7 +74,7 @@
                          $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
                          console.log('init ', $scope.model.agasSelected);
                      }, function(error) {
-                         console.error(data);
+                         console.error(error);
                      });
 
                      console.log('init cities and agas', data);
