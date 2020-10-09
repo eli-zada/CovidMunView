@@ -1,5 +1,5 @@
- angular.module('myApp', ['ngSanitize', 'ui.select'])
-     .controller('HomeCtrl', function($scope, $http, $q) {
+ angular.module('myApp', ['ngSanitize', 'ui.select', 'n3-line-chart'])
+     .controller('HomeCtrl', function($scope, covidgraph, RestService) {
          $scope.covids = [];
          $scope.covid = [];
          $scope.cities = [];
@@ -9,43 +9,54 @@
          $scope.agas = [];
          $scope.agasFiltered = [];
          $scope.dataLoading = false;
+         $scope.graphData = {};
+         $scope.hideGraph = true;
+
+         $scope.loadGraphData = function() {
+             covidgraph.getdatadaysback($scope.model.citySelected.code, 30)
+                 .then(function(data) {
+                     $scope.graphData = covidgraph.graphData;
+                     console.log('Graph Data refershed!');
+                 }, function(data) {
+                     alert(data);
+                 })
+         }
 
          $scope.getdata = function() {
-             let deferred = $q.defer();
              $scope.error = '';
              $scope.dataLoading = true;
-             $http.get('http://covid.moshe742.name/api/' + $scope.model.citySelected.code + '/')
-                 .then(function(data) {
-                     deferred.resolve(data);
+             return RestService.getData($scope.model.citySelected.code).then(
+                 function successCallback(data) {
                      $scope.covids = data.data;
                      $scope.proccessData($scope.covids, $scope);
                      $scope.filterAgas($scope.model.citySelected.code);
                      $scope.model.agasSelected = $scope.agasFiltered[0];
                      console.log('getdata ', $scope.model.agasSelected);
                      $scope.errorMsg = '';
-                 }, function(response) {
-                     // Second function handles error
+                 },
+                 function errorCallback(response) {
                      $scope.covids = [];
                      $scope.dataLoading = false;
                      $scope.errorMsg = "Some error occurred  ***\n";
                      $scope.errorMsg += response.status;
                      $scope.errorMsg += "\n" + response.statusText;
                      console.error(response);
-                     deferred.reject('Failure');
-                 });
-             return deferred.promise
+                 }
+             );
          };
 
          $scope.cityChanged = function(city) {
              $scope.model.citySelected = city;
              $scope.getdata();
+             $scope.loadGraphData();
          }
 
          $scope.agasChanged = function(agas) {
              $scope.model.agasSelected = agas;
              $scope.agas_name = agas.districts;
-             console.log($scope.covid[agas.agas_code]);
 
+             console.log('Graph ', $scope.graphData[agas.agas_code]);
+             console.log('AGAS ', $scope.covid[agas.agas_code]);
          }
 
          $scope.initEntites = function() {
@@ -57,6 +68,8 @@
                      $scope.cities = data[0].data;
                      $scope.agas = data[1].data;
                      $scope.model.citySelected = { "code": 3000, "name": "ירושלים" };
+                     $scope.loadGraphData();
+                     $scope.graphData = covidgraph.graphData;
                      $scope.getdata().then(function(data) {
                          $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
                          console.log('init ', $scope.model.agasSelected);
@@ -85,53 +98,53 @@
          };
 
          $scope.checkValue = function(value) {
-             if ( value == -1 ) {
+             if (value == -1) {
                  return "<15";
-             }
-             else 
-             {
+             } else {
                  return value;
              }
          }
 
          $scope.proccessData = function(covidArr, $scope) {
-             //$scope.covid = [];
              $scope.covid.length = 0;
              $scope.city = covidArr[0].city;
              $scope.agas_name = covidArr[0].agas;
              $scope.date = covidArr[0].date;
 
-             $scope.covid['all'] = {};
-             $scope.covid['all'].hospitalized = 0;
-             $scope.covid['all'].cases = 0;
-             $scope.covid['all'].recoveries = 0;
-             $scope.covid['all'].deaths = 0;
-             $scope.covid['all'].tested = 0;
+             $scope.covid['all'] = {
+                 "hospitalized": 0,
+                 "cases": 0,
+                 "recoveries": 0,
+                 "deaths": 0,
+                 "tested": 0
+             };
 
              covidArr.forEach(covidObj => {
                  _neibor = covidObj.agas_code;
                  if (!(_neibor in $scope.covid)) {
-                     $scope.covid[_neibor] = {};
-                     $scope.covid[_neibor].hospitalized = 0;
-                     $scope.covid[_neibor].cases = 0;
-                     $scope.covid[_neibor].recoveries = 0;
-                     $scope.covid[_neibor].deaths = 0;
-                     $scope.covid[_neibor].tested = 0;
+                     $scope.covid[_neibor] = {
+                         "hospitalized": 0,
+                         "cases": 0,
+                         "recoveries": 0,
+                         "deaths": 0,
+                         "tested": 0
+                     };
                  }
-                $scope.covid[_neibor].hospitalized  = $scope.checkValue(covidObj.accumulated_hospitalized);
-                $scope.covid[_neibor].cases         = $scope.checkValue(covidObj.accumulated_cases);
-                $scope.covid[_neibor].recoveries    = $scope.checkValue(covidObj.accumulated_recoveries);
-                $scope.covid[_neibor].deaths        = $scope.checkValue(covidObj.accumulated_deaths);
-                $scope.covid[_neibor].tested        = $scope.checkValue(covidObj.accumulated_tested);
+                 $scope.covid[_neibor].hospitalized = $scope.checkValue(covidObj.accumulated_hospitalized);
+                 $scope.covid[_neibor].cases = $scope.checkValue(covidObj.accumulated_cases);
+                 $scope.covid[_neibor].recoveries = $scope.checkValue(covidObj.accumulated_recoveries);
+                 $scope.covid[_neibor].deaths = $scope.checkValue(covidObj.accumulated_deaths);
+                 $scope.covid[_neibor].tested = $scope.checkValue(covidObj.accumulated_tested);
+
                  if (covidObj.accumulated_hospitalized > -1) {
                      $scope.covid['all'].hospitalized += covidObj.accumulated_hospitalized;
                  };
                  if (covidObj.accumulated_cases > -1) {
-                     
+
                      $scope.covid['all'].cases += covidObj.accumulated_cases;
                  };
                  if (covidObj.accumulated_recoveries > -1) {
-            
+
                      $scope.covid['all'].recoveries += covidObj.accumulated_recoveries;
                  };
                  if (covidObj.accumulated_deaths > -1) {
@@ -142,9 +155,43 @@
                      $scope.covid['all'].tested += covidObj.accumulated_tested;
                  };
 
-
              });
 
+         };
+
+         $scope.options = {
+             series: [{
+                     axis: "y",
+                     dataset: "dataset",
+                     key: "case01",
+                     label: "פעילים",
+                     color: "rgb(200, 96, 69)",
+                     type: ['line', 'dot']
+                 },
+                 {
+                     axis: "y",
+                     dataset: "dataset",
+                     key: "recover01",
+                     label: "מחלימים",
+                     color: "rgb(126, 181, 63)",
+                     type: ['line', 'dot']
+                 }
+             ],
+             axes: {
+                 x: {
+                     key: "x",
+                     type: 'date',
+                     tickFormat: d3.time.format("%d %b")
+                 },
+                 y: {
+                     includeZero: true,
+                     min: 0
+                 }
+             },
+
+             margin: {
+                 top: 30
+             }
          };
 
 
