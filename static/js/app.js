@@ -1,5 +1,5 @@
  angular.module('myApp', ['ngSanitize', 'ui.select', 'n3-line-chart'])
-     .controller('HomeCtrl', function($scope, $http, $q, covidgraph, RestService) {
+     .controller('HomeCtrl', function($scope, covidgraph, RestService) {
          $scope.covids = [];
          $scope.covid = [];
          $scope.cities = [];
@@ -23,12 +23,10 @@
          }
 
          $scope.getdata = function() {
-             //let deferred = $q.defer();
              $scope.error = '';
              $scope.dataLoading = true;
              return RestService.getData($scope.model.citySelected.code).then(
                  function successCallback(data) {
-                     //deferred.resolve(data);
                      $scope.covids = data.data;
                      $scope.proccessData($scope.covids, $scope);
                      $scope.filterAgas($scope.model.citySelected.code);
@@ -43,10 +41,8 @@
                      $scope.errorMsg += response.status;
                      $scope.errorMsg += "\n" + response.statusText;
                      console.error(response);
-                     //      deferred.reject('Failure');
                  }
              );
-             //return deferred.promise
          };
 
          $scope.cityChanged = function(city) {
