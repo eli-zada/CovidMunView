@@ -11,9 +11,10 @@
          $scope.dataLoading = false;
          $scope.graphData = {};
          $scope.hideGraph = true;
+         $scope.graphDaysBack = 30;
 
          $scope.loadGraphData = function() {
-             covidgraph.getdatadaysback($scope.model.citySelected.code, 30)
+             covidgraph.getdatadaysback($scope.model.citySelected.code, $scope.graphDaysBack)
                  .then(function(data) {
                      $scope.graphData = covidgraph.graphData;
                      console.log('Graph Data refershed!');

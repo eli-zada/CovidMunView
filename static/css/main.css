@@ -274,3 +274,7 @@ body {
 .button:hover {
     background-color: #555;
 }
+
+.days-back-field {
+    margin: 0 auto;
+}
