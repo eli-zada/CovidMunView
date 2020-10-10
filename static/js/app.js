@@ -161,7 +161,7 @@
                      axis: "y",
                      dataset: "dataset",
                      key: "case01",
-                     label: "פעילים",
+                     label: "סה\"כ מקרים מאומתים",
                      color: "rgb(200, 96, 69)",
                      type: ['line', 'dot']
                  },
@@ -169,7 +169,7 @@
                      axis: "y",
                      dataset: "dataset",
                      key: "recover01",
-                     label: "מחלימים",
+                     label: "סה\"כ מחלימים",
                      color: "rgb(126, 181, 63)",
                      type: ['line', 'dot']
                  }
