@@ -11,7 +11,7 @@
          $scope.dataLoading = false;
          $scope.graphData = {};
          $scope.hideGraph = true;
-         $scope.graphDaysBack = 30;
+         $scope.graphDaysBack = 90;
 
          $scope.loadGraphData = function() {
              covidgraph.getdatadaysback($scope.model.citySelected.code, $scope.graphDaysBack)
