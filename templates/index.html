@@ -4,44 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <title>CoronaInTheCity - http://www.coronainthecity.com/</title>
-    <script>
-        document.write('<link href="../static1/css/main.css?ver=' + Math.floor(Math.random() * 100) + '"rel="stylesheet"\>');
-    </script>
+
     <link href="../static1/css/bootstrap-4.3.1-dist/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-chart/2.0.9/LineChart.min.css" integrity="sha512-Aoi3jeQ+wVL+sz3gsrUJZlPABzM33M1DglVovzAg6iRmBJKlTDJELuOnCzMLm2ZJT3j1AnUCsJbVf8XShSoLwg==" crossorigin="anonymous" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static1/css/select.css">
 
     <script data-require="jquery@*" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="../static1/js/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/line-chart/2.0.9/LineChart.min.js" integrity="sha512-41JdPRcZSEb5KDKolNHn1KXftlqqGqZHyCACkKA5Fyksby3Mz2vG6QbxCe3DnCy8cSeYXKCAMwYtZZM5TvBlpQ==" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="../static/favicon.ico">
+    <link rel="shortcut icon" href="../static1/favicon.ico">
     <script src="../static1/js/jquery.min.js"></script>
     <script src="../static1/js/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="../static1/js/bootstrap-4.3.1-dist/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-chart/2.0.9/LineChart.min.css" integrity="sha512-Aoi3jeQ+wVL+sz3gsrUJZlPABzM33M1DglVovzAg6iRmBJKlTDJELuOnCzMLm2ZJT3j1AnUCsJbVf8XShSoLwg==" crossorigin="anonymous" />
-
-    <!-- ui-select files -->
     <script src="../static1/js/select.js"></script>
-    <link rel="stylesheet" href="../static1/css/select.css">
 
     <script>
+        document.write('<link href="../static1/css/main.css?ver=' + Math.floor(Math.random() * 100) + '"rel="stylesheet"\>');
         document.write('<script src="../static1/js/app.js?ver=' + Math.floor(Math.random() * 100) + '"\><\/script>');
         document.write('<script src="../static1/js/factories.js?ver=' + Math.floor(Math.random() * 100) + '"\><\/script>');
     </script>
 
     <!-- The Modal -->
     <div id="theTeamModal" class="modal fade">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <!-- Modal content -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">צוות הפיתוח</h4>
+                    <!-- <h4 class="modal-title">צוות הפיתוח</h4> -->
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
-                <table class="table">
+                <div class="card-deck">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">אלירן זדה</h2>
+                            <p class="about-title">מתכנת</p>
+                        </div>
+                        <div class="card-footer">
+                            <p> <a class="button" href="mailto:elizada@gmail.com">צור קשר</a></p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title"> משה נחמיאס</h2>
+                            <p class="about-title">מתכנת</p>
+                        </div>
+                        <div class="card-footer">
+                            <p> <a class="button" href="mailto:">צור קשר</a></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">רון לוי</h2>
+                            <p class="about-title">מתכנת</p>
+                        </div>
+                        <div class="card-footer">
+                            <p> <a class="button" href="mailto:ronlevy12000@gmail.com">צור קשר</a></p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">מורן אדן</h2>
+                            <p class="about-title">מתכנת</p>
+                        </div>
+                        <div class="card-footer">
+                            <p> <a class="button" href="mailto:moran.eden@gmail.com">צור קשר</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <table class="table">
                     <thead>
                         <tr>
                             <th>
@@ -86,7 +124,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table> -->
             </div>
         </div>
     </div>
