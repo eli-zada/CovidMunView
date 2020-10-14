@@ -141,7 +141,7 @@
             <div class="covid-filters">
                 <ui-select ng-model="model.citySelected" on-select="cityChanged($item)" theme="select2" style="min-width: 300px;" title="בחר עיר">
                     <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש עיר">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="city in cities | filter: {name: $select.search}">
+                    <ui-select-choices repeat="city in cities | filter: {name: $select.search} | orderBy:'name'">
                         <div ng-bind-html="city.name | highlight: $select.search"></div>
 
                     </ui-select-choices>
@@ -149,7 +149,7 @@
 
                 <ui-select ng-model="model.agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
                     <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
-                    <ui-select-choices repeat="agas in agasFiltered | propsFilter: {districts: $select.search,main_streets: $select.search }">
+                    <ui-select-choices repeat="agas in agasFiltered | propsFilter: {districts: $select.search,main_streets: $select.search } | orderBy:'districts'">
                         <div ng-bind-html="agas.districts | highlight: $select.search"></div>
                         <small>
                            <span ng-bind-html="agas.main_streets | highlight: $select.search"></span>
