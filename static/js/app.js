@@ -191,6 +191,13 @@
              }
          };
 
+         $scope.unknownFilter = function(agas) {
+             if (agas.districts.toLowerCase() == 'unknown') {
+                 return false;
+             }
+             return true;
+         }
+
 
          $scope.initEntites();
 

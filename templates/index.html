@@ -149,7 +149,10 @@
 
                 <ui-select ng-model="model.agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
                     <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
-                    <ui-select-choices repeat="agas in agasFiltered | propsFilter: {districts: $select.search,main_streets: $select.search } | orderBy:'districts'">
+                    <ui-select-choices repeat="agas in agasFiltered 
+                                        | propsFilter: {districts: $select.search,main_streets: $select.search } 
+                                        | filter: unknownFilter
+                                        | orderBy:'districts'">
                         <div ng-bind-html="agas.districts | highlight: $select.search"></div>
                         <small>
                            <span ng-bind-html="agas.main_streets | highlight: $select.search"></span>
