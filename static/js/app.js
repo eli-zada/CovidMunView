@@ -31,7 +31,7 @@
                      $scope.covids = data.data;
                      $scope.proccessData($scope.covids, $scope);
                      $scope.filterAgas($scope.model.citySelected.code);
-                     $scope.model.agasSelected = $scope.agasFiltered[0];
+                     $scope.setDefaultAgas();
                      console.log('getdata ', $scope.model.agasSelected);
                      $scope.errorMsg = '';
                  },
@@ -45,6 +45,17 @@
                  }
              );
          };
+
+         $scope.setDefaultAgas = function() {
+             for (let index = 0; index < $scope.agasFiltered.length; index++) {
+                 let agas = $scope.agasFiltered[index];
+                 if (agas.districts.toLowerCase() != 'unknown' &&
+                     agas.districts != 'אין שם שכונה באזור סטטיסטי זה') {
+                     $scope.model.agasSelected = agas;
+                     break;
+                 }
+             }
+         }
 
          $scope.cityChanged = function(city) {
              $scope.model.citySelected = city;
@@ -163,7 +174,7 @@
                      key: "case01",
                      label: "סה\"כ מקרים מאומתים",
                      color: "rgb(200, 96, 69)",
-                     type: ['line', 'dot']
+                     type: ['line', 'dot', 'area']
                  },
                  {
                      axis: "y",
@@ -171,7 +182,7 @@
                      key: "recover01",
                      label: "סה\"כ מחלימים",
                      color: "rgb(126, 181, 63)",
-                     type: ['line', 'dot']
+                     type: ['line', 'dot', 'area']
                  }
              ],
              axes: {
@@ -197,7 +208,6 @@
              }
              return true;
          }
-
 
          $scope.initEntites();
 
