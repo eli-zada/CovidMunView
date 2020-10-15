@@ -162,7 +162,9 @@
                 </ui-select>
 
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".collapse" aria-expanded="true" aria-controls="#result-tables" ng-click="hideGraph = !hideGraph">
-                    גרף
+                    <span ng-show="hideGraph">הצג גרף</span>
+                    <span ng-hide="hideGraph">סגור</span>
+                    
                   </button>
             </div>
             <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }}</div>
