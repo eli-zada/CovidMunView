@@ -1,12 +1,5 @@
 /* Small devices (landscape phones, 544px and up) */
 
-@media (min-width: 544px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-    /*1rem = 16px*/
-}
-
 .app-loading {
     position: relative;
     display: flex;
@@ -112,6 +105,10 @@ wrapper {
     direction: rtl;
 }
 
+.results-grid {
+    max-width: 700px;
+}
+
 .results-table {
     display: flex;
     justify-content: center;
@@ -119,6 +116,10 @@ wrapper {
 
 .results-table-row {
     border-color: rgb(68, 114, 196);
+}
+
+.results-table-result-title {
+    font-size: 1rem;
 }
 
 .results-table-cell {
@@ -130,7 +131,7 @@ wrapper {
     border-style: solid;
     border-width: 5px;
     color: black;
-    width: 200px;
+    max-width: 200px;
     height: 100px;
     vertical-align: middle;
 }

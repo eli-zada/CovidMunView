@@ -162,7 +162,7 @@
                     </ui-select-choices>
                 </ui-select>
 
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".collapse" aria-expanded="true" aria-controls="#result-tables" ng-click="hideGraph = !hideGraph">
+                <button class="btn btn-primary m-2" type="button" data-toggle="collapse" data-target=".collapse" aria-expanded="true" aria-controls="#result-tables" ng-click="hideGraph = !hideGraph">
                     <span ng-show="hideGraph">הצג גרף</span>
                     <span ng-hide="hideGraph">סגור</span>
                     
@@ -171,35 +171,31 @@
             <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }}</div>
             <div id="result-tables" class="collapse show">
                 <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date }}</div>
-                <div class="results-table">
-                    <div class="row results-table-row">
-                        <div class="box results-table-cell">
+                <div class="container results-grid">
+                    <div class="row results-table-row justify-content-center">
+                        <div class="col-sm box results-table-cell">
                             <div class="results-table-result">{{ covid[model.agasSelected.agas_code].hospitalized }}</div>
                             <div class="results-table-result-title">סה"כ מאושפזים</div>
                         </div>
-                        <div class="box results-table-cell">
+                        <div class="col-sm box results-table-cell">
                             <div class="results-table-result">{{ covid[model.agasSelected.agas_code].cases }}</div>
                             <div class="results-table-result-title">סה"כ מקרים מאומתים</div>
                         </div>
-                        <div class="box results-table-cell">
+                        <div class="col-sm box results-table-cell">
                             <div class="results-table-result">{{ covid[model.agasSelected.agas_code].tested }}</div>
                             <div class="results-table-result-title">סה"כ נבדקים</div>
                         </div>
                     </div>
-                </div>
-                <div class="results-table">
-                    <div class="row">
-                        <div class="box results-table-cell">
+                    <div class="row results-table-row justify-content-center">
+                        <div class="col-sm box results-table-cell">
                             <div class="results-table-result">{{ covid[model.agasSelected.agas_code].deaths }}</div>
                             <div class="results-table-result-title">סה"כ נפטרים</div>
                         </div>
-                        <div class="box results-table-cell">
+                        <div class="col-sm box results-table-cell">
                             <div class="results-table-result">{{ covid[model.agasSelected.agas_code].recoveries }}</div>
                             <div class="results-table-result-title">סה"כ מחלימים</div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
             <div ng-class="{'graph-hidden' : hideGraph}">
