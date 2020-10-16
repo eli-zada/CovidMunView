@@ -96,6 +96,7 @@
                              $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
                          } else {
                              $scope.model.agasSelected = _agasFromStorage;
+                             $scope.saveAgasToStorage(_agasFromStorage);
                          }
                          $scope.dataLoading = false;
                          console.log('init ', $scope.model.agasSelected);
@@ -226,10 +227,12 @@
 
          $scope.saveCityToStorage = function(city) {
              storageService.set('covid-city', JSON.stringify(city));
+             console.log('saveCityToStorage ', 'covid-city: ', city);
          }
 
          $scope.saveAgasToStorage = function(agas) {
              storageService.set('covid-agas', JSON.stringify(agas));
+             console.log('saveAgasToStorage ', 'covid-agas: ', agas);
          }
 
          $scope.loadCityFromStorage = function() {
