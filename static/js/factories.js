@@ -1,5 +1,5 @@
 angular.module('myApp')
-    .factory("RestService", function($http) {
+    .factory('RestService', function($http) {
         var service = {};
         var urlBase = "http://covid.moshe742.name/api/";
 
@@ -60,4 +60,15 @@ angular.module('myApp')
 
         return service;
 
+    }])
+    .factory('storageService', ['$rootScope', function($rootScope) {
+
+        return {
+            get: function(key) {
+                return localStorage.getItem(key);
+            },
+            set: function(key, data) {
+                localStorage.setItem(key, data);
+            }
+        };
     }]);

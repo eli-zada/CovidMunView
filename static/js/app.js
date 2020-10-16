@@ -1,5 +1,5 @@
  angular.module('myApp', ['ngSanitize', 'ui.select', 'n3-line-chart'])
-     .controller('HomeCtrl', function($scope, $q, covidgraph, RestService) {
+     .controller('HomeCtrl', function($scope, $q, covidgraph, RestService, storageService) {
          $scope.covids = [];
          $scope.covid = [];
          $scope.cities = [];
@@ -11,7 +11,7 @@
          $scope.dataLoading = false;
          $scope.graphData = {};
          $scope.hideGraph = true;
-         $scope.graphDaysBack = 90;
+         $scope.graphDaysBack = 45;
 
          $scope.loadGraphData = function() {
              covidgraph.getdatadaysback($scope.model.citySelected.code, $scope.graphDaysBack)
@@ -33,6 +33,7 @@
                      $scope.filterAgas($scope.model.citySelected.code);
                      $scope.setDefaultAgas();
                      console.log('getdata ', $scope.model.agasSelected);
+                     $scope.dataLoading = false;
                      $scope.errorMsg = '';
                  },
                  function errorCallback(response) {
@@ -52,6 +53,7 @@
                  if (agas.districts.toLowerCase() != 'unknown' &&
                      agas.districts != 'אין שם שכונה באזור סטטיסטי זה') {
                      $scope.model.agasSelected = agas;
+                     $scope.saveAgasToStorage(agas);
                      break;
                  }
              }
@@ -61,11 +63,13 @@
              $scope.model.citySelected = city;
              $scope.getdata();
              $scope.loadGraphData();
+             $scope.saveCityToStorage(city);
          }
 
          $scope.agasChanged = function(agas) {
              $scope.model.agasSelected = agas;
              $scope.agas_name = agas.districts;
+             $scope.saveAgasToStorage(agas);
 
              console.log('Graph ', $scope.graphData[agas.agas_code]);
              console.log('AGAS ', $scope.covid[agas.agas_code]);
@@ -76,17 +80,28 @@
              $scope.dataLoading = true;
              let agas_api = RestService.getAgas();
              let cities_api = RestService.getCities();
+             let _agasFromStorage = $scope.loadAgasFromStorage();
              $q.all([cities_api, agas_api]).then(data => {
                      $scope.cities = data[0].data;
                      $scope.agas = data[1].data;
-                     $scope.model.citySelected = { "code": 3000, "name": "ירושלים" };
+                     $scope.model.citySelected = $scope.loadCityFromStorage();
+                     if (!$scope.model.citySelected) {
+                         $scope.model.citySelected = { "code": 3000, "name": "ירושלים" };
+                     }
                      $scope.loadGraphData();
                      $scope.graphData = covidgraph.graphData;
                      $scope.getdata().then(function(data) {
-                         $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
+
+                         if (!_agasFromStorage) {
+                             $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
+                         } else {
+                             $scope.model.agasSelected = _agasFromStorage;
+                         }
+                         $scope.dataLoading = false;
                          console.log('init ', $scope.model.agasSelected);
                      }, function(error) {
                          console.error(error);
+                         $scope.dataLoading = false;
                      });
 
                      console.log('init cities and agas', data);
@@ -207,6 +222,30 @@
                  return false;
              }
              return true;
+         }
+
+         $scope.saveCityToStorage = function(city) {
+             storageService.set('covid-city', JSON.stringify(city));
+         }
+
+         $scope.saveAgasToStorage = function(agas) {
+             storageService.set('covid-agas', JSON.stringify(agas));
+         }
+
+         $scope.loadCityFromStorage = function() {
+             let _city = storageService.get('covid-city');
+             if (_city) {
+                 return JSON.parse(_city);
+             }
+             return null;
+         }
+
+         $scope.loadAgasFromStorage = function() {
+             let _agas = storageService.get('covid-agas');
+             if (_agas) {
+                 return JSON.parse(_agas);
+             }
+             return null;
          }
 
          $scope.initEntites();

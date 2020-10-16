@@ -27,9 +27,10 @@
     <script src="../static1/js/select.js"></script>
 
     <script>
-        document.write('<link href="../static1/css/main.css?ver=' + Math.floor(Math.random() * 100) + '"rel="stylesheet"\>');
-        document.write('<script src="../static1/js/app.js?ver=' + Math.floor(Math.random() * 100) + '"\><\/script>');
-        document.write('<script src="../static1/js/factories.js?ver=' + Math.floor(Math.random() * 100) + '"\><\/script>');
+        let ver = Math.floor(Math.random() * 100);
+        document.write('<link href="../static1/css/main.css?ver=' + ver + '"rel="stylesheet"\>');
+        document.write('<script src="../static1/js/app.js?ver=' + ver + '"\><\/script>');
+        document.write('<script src="../static1/js/factories.js?ver=' + ver + '"\><\/script>');
     </script>
 
     <!-- The Modal -->
@@ -82,58 +83,17 @@
                     </div>
                 </div>
 
-                <!-- <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                שם מלא
-                            </th>
-                            <th>
-                                כתובת דוא"ל
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                אלירן זדה
-                            </td>
-                            <td>
-                                elizada@gmail.com
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                מורן אדן
-                            </td>
-                            <td>
-                                moran.eden@gmail.com
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                משה נחמיאס
-                            </td>
-                            <td>
-                                moshegrey@gmail.com
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                רון לוי
-                            </td>
-                            <td>
-                                ronlevy12000@gmail.com
-                            </td>
-                        </tr>
-                    </tbody>
-                </table> -->
             </div>
         </div>
     </div>
 </head>
 
 <body ng-app="myApp" ng-controller="HomeCtrl">
+    <div class="overlay" ng-class="{'show' : dataLoading}"></div>
+    <div class="spanner" ng-class="{'show' : dataLoading}">
+        <div class="loader"></div>
+        <!-- <p>טוען נתונים, אנא המתן</p> -->
+    </div>
     <wrapper class="d-flex flex-column">
         <div class="covid-header text-white">
             <div style="padding: 10px;">{{ currentDate | date:'dd/MM/yyyy' }}</div>
@@ -166,9 +126,8 @@
 
                 <button class="btn btn-primary m-2" type="button" data-toggle="collapse" data-target=".collapse" aria-expanded="true" aria-controls="#result-tables" ng-click="hideGraph = !hideGraph">
                     <span ng-show="hideGraph">הצג גרף</span>
-                    <span ng-hide="hideGraph">סגור</span>
-                    
-                  </button>
+                    <span ng-hide="hideGraph">סגור</span>    
+                </button>
             </div>
             <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }}</div>
             <div id="result-tables" class="collapse show">
