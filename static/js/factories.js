@@ -42,7 +42,7 @@ angular.module('myApp')
 
         service.proccessGraphData = function(covidArr) {
             let _graphData = {};
-            covidArr.forEach(covidObj => {
+            covidArr["agas"].forEach(covidObj => {
                 _neibor = covidObj.agas_code;
                 if (!(_neibor in _graphData)) {
                     _graphData[_neibor] = { "dataset": [] };
@@ -55,6 +55,21 @@ angular.module('myApp')
                 _graphData[_neibor].dataset.push(_obj);
 
             });
+
+            covidArr["city"].forEach(covidObj => {
+                _neibor = "all";
+                if (!(_neibor in _graphData)) {
+                    _graphData[_neibor] = { "dataset": [] };
+                }
+                _obj = {
+                    "x": new Date(moment(covidObj.date, "DD/MM/YY").format("MM/DD/YY")),
+                    "case01": covidObj.accumulated_cases == -1 ? 0 : covidObj.accumulated_cases,
+                    "recover01": covidObj.accumulated_recoveries == -1 ? 0 : covidObj.accumulated_recoveries
+                };
+                _graphData[_neibor].dataset.push(_obj);
+
+            });
+
             return _graphData;
         };
 

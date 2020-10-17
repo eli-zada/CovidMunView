@@ -4,6 +4,7 @@
          $scope.covid = [];
          $scope.cities = [];
          $scope.model = {};
+         $scope.date = {};
          $scope.model.citySelected = { "code": 3000, "name": "ירושלים" };
          $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
          $scope.agas = [];
@@ -34,7 +35,8 @@
                      $scope.covids = data.data;
                      $scope.proccessData($scope.covids, $scope);
                      $scope.filterAgas($scope.model.citySelected.code);
-                     $scope.setDefaultAgas();
+                     //$scope.setDefaultAgas();
+                     $scope.model.agasSelected = { "agas_code": "all", "districts": "כל השכונות" };
                      console.log('getdata ', $scope.model.agasSelected);
                      $scope.dataLoading = false;
                      $scope.errorMsg = '';
@@ -70,6 +72,9 @@
          }
 
          $scope.agasChanged = function(agas) {
+             if (!agas) {
+                 agas = { "agas_code": "all", "districts": "כל השכונות" };
+             }
              $scope.model.agasSelected = agas;
              $scope.agas_name = agas.districts;
              $scope.saveAgasToStorage(agas);
@@ -134,19 +139,19 @@
 
          $scope.proccessData = function(covidArr, $scope) {
              $scope.covid.length = 0;
-             $scope.city = covidArr[0].city;
-             $scope.agas_name = covidArr[0].agas;
-             $scope.date = covidArr[0].date;
+             $scope.city = $scope.model.citySelected.name;
+             //$scope.agas_name = covidArr["agas"][0].agas;
+             $scope.date['all'] = covidArr["city"][0].date;
 
              $scope.covid['all'] = {
-                 "hospitalized": 0,
-                 "cases": 0,
-                 "recoveries": 0,
-                 "deaths": 0,
-                 "tested": 0
+                 "hospitalized": $scope.checkValue(covidArr["city"][0].accumulated_hospitalized),
+                 "cases": $scope.checkValue(covidArr["city"][0].accumulated_cases),
+                 "recoveries": $scope.checkValue(covidArr["city"][0].accumulated_recoveries),
+                 "deaths": $scope.checkValue(covidArr["city"][0].accumulated_deaths),
+                 "tested": $scope.checkValue(covidArr["city"][0].accumulated_tested)
              };
 
-             covidArr.forEach(covidObj => {
+             covidArr["agas"].forEach(covidObj => {
                  _neibor = covidObj.agas_code;
                  if (!(_neibor in $scope.covid)) {
                      $scope.covid[_neibor] = {
@@ -157,30 +162,12 @@
                          "tested": 0
                      };
                  }
+                 $scope.date[_neibor] = covidObj.date;
                  $scope.covid[_neibor].hospitalized = $scope.checkValue(covidObj.accumulated_hospitalized);
                  $scope.covid[_neibor].cases = $scope.checkValue(covidObj.accumulated_cases);
                  $scope.covid[_neibor].recoveries = $scope.checkValue(covidObj.accumulated_recoveries);
                  $scope.covid[_neibor].deaths = $scope.checkValue(covidObj.accumulated_deaths);
                  $scope.covid[_neibor].tested = $scope.checkValue(covidObj.accumulated_tested);
-
-                 if (covidObj.accumulated_hospitalized > -1) {
-                     $scope.covid['all'].hospitalized += covidObj.accumulated_hospitalized;
-                 };
-                 if (covidObj.accumulated_cases > -1) {
-
-                     $scope.covid['all'].cases += covidObj.accumulated_cases;
-                 };
-                 if (covidObj.accumulated_recoveries > -1) {
-
-                     $scope.covid['all'].recoveries += covidObj.accumulated_recoveries;
-                 };
-                 if (covidObj.accumulated_deaths > -1) {
-                     $scope.covid['all'].deaths += covidObj.accumulated_deaths;
-                 };
-                 if (covidObj.accumulated_tested > -1) {
-
-                     $scope.covid['all'].tested += covidObj.accumulated_tested;
-                 };
 
              });
 

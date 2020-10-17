@@ -125,7 +125,7 @@
                 </ui-select>
 
                 <ui-select ng-model="model.agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
-                    <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
+                    <ui-select-match allow-clear="true" placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
                     <ui-select-choices repeat="agas in agasFiltered 
                                         | propsFilter: {districts: $select.search,main_streets: $select.search } 
                                         | filter: unknownFilter
@@ -145,7 +145,7 @@
             </div>
             <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }}</div>
             <div id="result-tables" class="collapse show">
-                <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date }}</div>
+                <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date[model.agasSelected.agas_code] }}</div>
                 <div class="container results-grid">
                     <div class="row results-table-row justify-content-center">
                         <div class="col-sm box results-table-cell">
