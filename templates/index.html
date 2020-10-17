@@ -69,7 +69,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title"> משה נחמיאס</h2>
+                            <h2 class="card-title">משה נחמיאס</h2>
                             <p class="about-title">מתכנת</p>
                         </div>
                         <div class="card-footer">
@@ -175,7 +175,7 @@
             </div>
             <div ng-class="{'graph-hidden' : hideGraph}">
                 <div class="input-group mb-3 w-25 days-back-field" title="מספר הימים אחורה להצגת נתונים (מהיום) ">
-                    <input type="text" class="form-control text-center" aria-label="Default" aria-describedby="inputGroup-sizing-default" ng-change="loadGraphData()" ng-model="graphDaysBack">
+                    <input type="text" class="form-control text-center" aria-label="Default" aria-describedby="inputGroup-sizing-default" ng-change="loadGraphData()" ng-model-options="{ debounce: 500 }" ng-model="graphDaysBack">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">מספר ימים</span>
                     </div>
