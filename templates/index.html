@@ -116,9 +116,9 @@
             <div class="title"></div>​
             <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
             <div class="covid-filters">
-                <ui-select ng-model="model.citySelected" on-select="cityChanged($item)" theme="select2" style="min-width: 300px;" title="בחר עיר">
+                <ui-select autofocus="true" ng-model="model.citySelected" on-select="cityChanged($item)" theme="select2" style="min-width: 300px;" title="בחר עיר">
                     <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש עיר">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="city in cities | filter: {name: $select.search} | orderBy:'name'">
+                    <ui-select-choices position="down" repeat="city in cities | filter: {name: $select.search} | orderBy:'name'">
                         <div ng-bind-html="city.name | highlight: $select.search"></div>
 
                     </ui-select-choices>
@@ -126,7 +126,7 @@
 
                 <ui-select ng-model="model.agasSelected" on-select="agasChanged($item)" theme="select2" style="min-width: 300px;" title="בחר שכונה">
                     <ui-select-match allow-clear="true" placeholder="לחץ לפתיחת הרשימה ו\או חיפוש שכונה">{{$select.selected.districts}}</ui-select-match>
-                    <ui-select-choices repeat="agas in agasFiltered 
+                    <ui-select-choices position="down" repeat="agas in agasFiltered 
                                         | propsFilter: {districts: $select.search,main_streets: $select.search } 
                                         | filter: unknownFilter
                                         | orderBy:'districts'">
@@ -136,6 +136,9 @@
                         </small>
 
                     </ui-select-choices>
+                    <ui-select-no-choice>
+                        לא נמצאו שכונות בבסיס הנתונים
+                    </ui-select-no-choice>
                 </ui-select>
 
                 <button class="btn btn-primary m-2" type="button" data-toggle="collapse" data-target=".collapse" aria-expanded="true" aria-controls="#result-tables" ng-click="hideGraph = !hideGraph">
