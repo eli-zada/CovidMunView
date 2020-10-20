@@ -61,7 +61,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title">אלירן זדה</h2>
-                            <p class="about-title">מתכנת</p>
+                            <p class="about-title"></p>
                         </div>
                         <div class="card-footer">
                             <p> <a class="button" href="https://www.linkedin.com/in/eliran-zada/" target="_blank">צור קשר</a></p>
@@ -70,26 +70,16 @@
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title">משה נחמיאס</h2>
-                            <p class="about-title">מתכנת</p>
+                            <p class="about-title"></p>
                         </div>
                         <div class="card-footer">
                             <p> <a class="button" href="https://www.linkedin.com/in/moshe-nahmias/" target="_blank">צור קשר</a></p>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title">רון לוי</h2>
-                            <p class="about-title">מתכנת</p>
-                        </div>
-                        <div class="card-footer">
-                            <p> <a class="button" href="mailto:ronlevy12000@gmail.com" target="_blank">צור קשר</a></p>
-                        </div>
-                    </div>
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title">מורן אדן</h2>
-                            <p class="about-title">מתכנת</p>
+                            <p class="about-title"></p>
                         </div>
                         <div class="card-footer">
                             <p> <a class="button" href="https://www.linkedin.com/in/moran-eden/" target="_blank">צור קשר</a></p>
@@ -152,16 +142,16 @@
                 <div class="container results-grid">
                     <div class="row results-table-row justify-content-center">
                         <div class="col-sm box results-table-cell">
-                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].hospitalized }}</div>
-                            <div class="results-table-result-title">סה"כ מאושפזים</div>
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].active_cases }}</div>
+                            <div class="results-table-result-title">*חולים פעילים</div>
+                        </div>
+                        <div class="col-sm box results-table-cell">
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].recoveries }}</div>
+                            <div class="results-table-result-title">סה"כ מחלימים</div>
                         </div>
                         <div class="col-sm box results-table-cell">
                             <div class="results-table-result">{{ covid[model.agasSelected.agas_code].cases }}</div>
-                            <div class="results-table-result-title">סה"כ מקרים מאומתים</div>
-                        </div>
-                        <div class="col-sm box results-table-cell">
-                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].tested }}</div>
-                            <div class="results-table-result-title">סה"כ נבדקים</div>
+                            <div class="results-table-result-title">סה"כ מאומתים</div>
                         </div>
                     </div>
                     <div class="row results-table-row justify-content-center">
@@ -170,11 +160,18 @@
                             <div class="results-table-result-title">סה"כ נפטרים</div>
                         </div>
                         <div class="col-sm box results-table-cell">
-                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].recoveries }}</div>
-                            <div class="results-table-result-title">סה"כ מחלימים</div>
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].hospitalized }}</div>
+                            <div class="results-table-result-title">סה"כ מאושפזים</div>
+                        </div>
+                        <div class="col-sm box results-table-cell">
+                            <div class="results-table-result">{{ covid[model.agasSelected.agas_code].tested }}</div>
+                            <div class="results-table-result-title">סה"כ נבדקים</div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="active-cases-comment">
+                * מספר החולים הפעילים אינו מדויק כאשר ערך סה"כ הנפטרים נמוך מ-15 אך גדול מ-0
             </div>
             <div ng-class="{'graph-hidden' : hideGraph}">
                 <div class="input-group mb-3 w-25 days-back-field" title="מספר הימים אחורה להצגת נתונים (מהיום) ">
@@ -187,14 +184,11 @@
                     <linechart data="graphData[model.agasSelected.agas_code]" options="options"></linechart>
                 </div>
             </div>
-
-
-
         </main>
-        <footer class="container-fluid w-100 text-black-50 py-1 covid-footer text-right">
+        <footer class="container-fluid w-100 text-black-50 py-1 covid-footer">
             <div class="covid-footer">
                 פותח על ידי חברי קהילת <a href="https://www.facebook.com/groups/306586986847428" target="_blank">Python Israel בפייסבוק</a> |
-                <a href="#" id="theTeamLink" data-toggle="modal" data-target="#theTeamModal">רשימת המשתתפים</a>
+                <a href="#" id="theTeamLink" data-toggle="modal" data-target="#theTeamModal">צוות הפיתוח</a>
             </div>
             <div class="covid-footer">
                 <p>בשיתוף תחום חדשנות ויזמות ראש העין ו<a href="https://govextra.gov.il/ministry-of-health/corona/corona-virus/" target="_blank">משרד הבריאות</a></p>
