@@ -70,15 +70,26 @@ wrapper {
     background-color: rgb(242, 242, 242);
 }
 
+@media screen and (max-width: 480px) {
+    title {
+        width: auto ;
+        max-width: 40% ;
+        height: auto ;
+        margin: auto;
+    }
+}
+
 .title {
-    height: 40%;
-    width: 40%;
+    width: auto ;
+    max-width: 40% ;
+    height: auto ;
     content: url("../images/title.png");
     margin: auto;
 }
 
 .covid-footer {
-    background-color: rgb(242, 242, 242);
+    background-color:  rgb(0, 32, 96);
+    color: cornsilk;
     text-align: center;
     direction: rtl;
 }
@@ -99,9 +110,8 @@ wrapper {
 }
 
 .filered-title {
-    color: rgb(192, 90, 17);
+    color: rgb(0, 32, 96);
     font-weight: bold;
-    font-family: "Guttman Haim";
     direction: rtl;
 }
 
@@ -119,7 +129,13 @@ wrapper {
 }
 
 .results-table-result-title {
-    font-size: 1rem;
+    font-size: 25px;
+}
+
+.active-cases-comment {
+    text-align: center;
+    font-size: 16px;
+    direction: rtl;
 }
 
 .results-table-cell {
@@ -275,7 +291,7 @@ body {
     display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #000;
+    background-color: rgb(0, 32, 96);
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -399,4 +415,18 @@ body {
     font-weight: bold;
     font-family: "Guttman Haim";
     direction: rtl;
+}
+
+a:link, a:visited {
+    border: none;
+    color: #FFFFFF;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+   cursor: pointer;
+   display: inline-block;
+}
+
+a:hover, a:active {
+   background-color: rgb(0, 112, 192);
 }
