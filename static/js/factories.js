@@ -1,7 +1,7 @@
 angular.module('myApp')
     .factory('RestService', function($http) {
         var service = {};
-        var urlBase = "https://covid.moshe742.name/api/";
+        var urlBase = "/api/";
 
         service.getData = function(cityId) {
             return $http.get(urlBase + cityId + "/");
