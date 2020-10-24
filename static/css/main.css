@@ -132,9 +132,29 @@ wrapper {
     font-size: 1.1rem;
 }
 
-.active-cases-comment {
-    text-align: center;
-    font-size: 16px;
+.comments-box {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border: 0.2rem solid rgb(0, 32, 96);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+    max-width: 50%;
+    overflow:hidden;
+}
+
+.comments-title {
+    text-align: right;
+    font-size: 1.1rem;
+    direction: rtl;
+    text-decoration-style: solid;
+}
+
+.comments-text {
+    text-align: right;
+    font-size: 0.9rem;
     direction: rtl;
 }
 

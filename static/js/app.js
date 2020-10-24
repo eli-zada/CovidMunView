@@ -134,7 +134,16 @@ angular.module('myApp', ['ngSanitize', 'ui.select', 'n3-line-chart'])
     };
 
     $scope.checkValue = function(value) {
-        return value == -1 ? "<15" : value;
+        if (value != 0 && (value == "" || value == undefined))
+        {
+            return "-";
+        }
+        else if (value == -1)
+        {
+            return "<15";
+        }
+
+        return value;
     }
 
     $scope.proccessData = function(covidArr, $scope) {
