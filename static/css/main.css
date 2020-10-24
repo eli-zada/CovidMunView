@@ -150,6 +150,13 @@ wrapper {
     overflow: hidden;
 }
 
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="comments-b"] {
+        max-width: 100%;
+    }
+}
+
 .comments-title {
     text-align: right;
     font-size: 1.1rem;
