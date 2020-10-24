@@ -25,7 +25,7 @@
     <link href="../static1/css/bootstrap-4.3.1-dist/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-chart/2.0.9/LineChart.min.css" integrity="sha512-Aoi3jeQ+wVL+sz3gsrUJZlPABzM33M1DglVovzAg6iRmBJKlTDJELuOnCzMLm2ZJT3j1AnUCsJbVf8XShSoLwg==" crossorigin="anonymous" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static1/css/select.css">
 
     <script data-require="jquery@*" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -36,7 +36,7 @@
     <link rel="shortcut icon" href="../static1/favicon.ico">
     <script src="../static1/js/jquery.min.js"></script>
     <script src="../static1/js/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="../static1/js/bootstrap-4.3.1-dist/bootstrap.min.js"></script>
     <script src="../static1/js/select.js"></script>
 
@@ -45,6 +45,17 @@
         document.write('<link href="../static1/css/main.css?ver=' + ver + '"rel="stylesheet"\>');
         document.write('<script src="../static1/js/app.js?ver=' + ver + '"\><\/script>');
         document.write('<script src="../static1/js/factories.js?ver=' + ver + '"\><\/script>');
+
+
+        $(document).ready(function() {
+            $('[data-toggle=tooltip]').hover(function() {
+                // on mouseenter
+                $(this).tooltip('show');
+            }, function() {
+                // on mouseleave
+                $(this).tooltip('hide');
+            });
+        });
     </script>
 
     <!-- The Modal -->
@@ -103,7 +114,7 @@
             <div style="padding: 10px;">{{ currentDate | date:'dd/MM/yyyy' }}</div>
         </div>
         <main class="container-fluid py-3 flex-fill covid-main-body">
-            <div class="title"></div>​
+            <div class="title w-50"></div>​
             <div id="error" ng-show="errorMsg">{{ errorMsg }}</div>
             <div class="covid-filters">
                 <ui-select autofocus="true" ng-model="model.citySelected" on-select="cityChanged($item)" theme="select2" style="min-width: 300px;" title="בחר עיר">
@@ -136,7 +147,16 @@
                     <span ng-hide="hideGraph">סגור</span>    
                 </button>
             </div>
-            <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }}</div>
+            <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">
+                <div class="down-arrow" ng-show="casesTrend[model.agasSelected.agas_code] < 0" data-toggle="tooltip" data-original-title="ירידה בכמות החולים הפעילים: {{casesTrend[model.agasSelected.agas_code]}}">
+                    <i class="fa fa-long-arrow-down"></i>
+                </div>
+                <div class="up-arrow" ng-show="casesTrend[model.agasSelected.agas_code] > 0" data-toggle="tooltip" data-original-title="{{casesTrend[model.agasSelected.agas_code]}}">
+                    <i class="fa fa-long-arrow-up"></i>
+
+                </div>
+                <div class="covid-status"> תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }} </div>
+            </div>
             <div id="result-tables" class="collapse show">
                 <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date[model.agasSelected.agas_code] }}</div>
                 <div class="container results-grid">
@@ -178,12 +198,9 @@
                 </div>
                 <div class="comments-text">
                     * נתוני האתר הם על בסיס מאגרי המידע של משרד הבריאות
-                    <br>
-                    * רשימת השכונות מתבססת על רישומי הלמ"ס (בהתאם לדרישת משרד הבריאות) - לכן ישנן שכונות שאינן מופיעות ברשימה
-                    <br>
-                    * מספר החולים הפעילים אינו מדויק כאשר ערך סה"כ הנפטרים ו\או המחלימים נמוך מ-15
-                    <br>
-                    * שדה המכיל את הערך "-" הוא שדה שלא התקבל מידע לגביו
+                    <br> * רשימת השכונות מתבססת על רישומי הלמ"ס (בהתאם לדרישת משרד הבריאות) - לכן ישנן שכונות שאינן מופיעות ברשימה
+                    <br> * מספר החולים הפעילים אינו מדויק כאשר ערך סה"כ הנפטרים ו\או המחלימים נמוך מ-15
+                    <br> * שדה המכיל את הערך "-" הוא שדה שלא התקבל מידע לגביו
                 </div>
             </div>
             <div ng-class="{'graph-hidden' : hideGraph}">

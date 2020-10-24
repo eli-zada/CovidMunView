@@ -1,5 +1,10 @@
 /* Small devices (landscape phones, 544px and up) */
 
+@font-face {
+    font-family: "FontAwesome";
+    src: url(https://cdn2.hubspot.net/hubfs/548247/Tomorrow%20People/Landing%20Page/Template%20Build/fa-regular-400.svg) format("svg");
+}
+
 .app-loading {
     position: relative;
     display: flex;
@@ -80,8 +85,8 @@ wrapper {
 }
 
 .title {
-    width: auto;
-    max-width: 40%;
+    /* width: auto;
+    max-width: 40%; */
     height: auto;
     content: url("../images/title.png");
     margin: auto;
@@ -142,7 +147,7 @@ wrapper {
     margin-right: auto;
     padding: 1em;
     max-width: 50%;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .comments-title {
@@ -249,6 +254,7 @@ body {
 
 .my-chart {
     height: 300px;
+    margin-bottom: 20px;
 }
 
 .graph-hidden {
@@ -451,4 +457,30 @@ a:visited {
 a:hover,
 a:active {
     background-color: rgb(0, 112, 192);
+}
+
+.down-arrow {
+    display: inline-block;
+    color: darkgreen;
+    vertical-align: middle;
+    font-size: 48px;
+}
+
+.up-arrow {
+    display: inline-block;
+    color: red;
+    vertical-align: middle;
+    font-size: 48px;
+}
+
+.down-arrow-data {
+    font-size: 20px;
+    vertical-align: middle;
+    direction: ltr;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.covid-status {
+    display: inline-block;
 }
