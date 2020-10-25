@@ -472,10 +472,8 @@ a:active {
 }
 
 .up-arrow {
-    display: inline-block;
     color: red;
-    vertical-align: middle;
-    font-size: 48px;
+    font-size: 60px;
 }
 
 .covid-status {
