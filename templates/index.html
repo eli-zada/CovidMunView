@@ -121,7 +121,6 @@
                     <ui-select-match placeholder="לחץ לפתיחת הרשימה ו\או חיפוש עיר">{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices position="down" repeat="city in cities | filter: {name: $select.search} | orderBy:'name'">
                         <div ng-bind-html="city.name | highlight: $select.search"></div>
-
                     </ui-select-choices>
                 </ui-select>
 
@@ -148,20 +147,19 @@
                 </button>
             </div>
             <div class="h2 text-center filered-title" style="margin-bottom: 0px; margin-top: 10px;">
-                <div class="down-arrow" ng-show="casesTrend[model.agasSelected.agas_code] < 0" data-toggle="tooltip" data-original-title="ירידה בכמות החולים הפעילים: {{casesTrend[model.agasSelected.agas_code]}}">
-                    <i class="fa fa-long-arrow-down"></i>
-                </div>
-                <div class="up-arrow" ng-show="casesTrend[model.agasSelected.agas_code] > 0" data-toggle="tooltip" data-original-title="{{casesTrend[model.agasSelected.agas_code]}}">
-                    <i class="fa fa-long-arrow-up"></i>
-
-                </div>
                 <div class="covid-status"> תמונת המצב ב{{ model.citySelected.name }}, {{ model.agasSelected.districts }} </div>
             </div>
             <div id="result-tables" class="collapse show">
                 <div class="h4 mb-4 p-1 text-center filered-title">נכון ליום {{ date[model.agasSelected.agas_code] }}</div>
                 <div class="container results-grid">
                     <div class="row results-table-row justify-content-center">
-                        <div class="col-sm box results-table-cell">
+                        <div class="col-sm box results-table-cell d-block clearfix">
+                            <div class="down-arrow float-right" ng-show="casesTrend[model.agasSelected.agas_code] < 0" data-toggle="tooltip" data-original-title="ירידה בכמות החולים הפעילים: {{casesTrend[model.agasSelected.agas_code]}}">
+                                <i class="fa fa-long-arrow-down"></i>
+                            </div>
+                            <div class="up-arrow float-right" ng-show="casesTrend[model.agasSelected.agas_code] > 0" data-toggle="tooltip" data-original-title="{{casesTrend[model.agasSelected.agas_code]}}">
+                                <i class="fa fa-long-arrow-up"></i>
+                            </div>
                             <div class="results-table-result">{{ covid[model.agasSelected.agas_code].active_cases }}</div>
                             <div class="results-table-result-title">*חולים פעילים</div>
                         </div>
