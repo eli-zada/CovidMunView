@@ -5,8 +5,8 @@ angular.module('myApp', ['ngSanitize', 'ui.select', 'n3-line-chart'])
         $scope.cities = [];
         $scope.model = {};
         $scope.date = {};
-        $scope.model.citySelected = { "code": 3000, "name": "ירושלים" };
-        $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
+        $scope.model.citySelected = { "code": 2640, "name": "ראש העין" };
+        $scope.model.agasSelected = { "agas_code": "all", "districts": "כל השכונות" };
         $scope.agas = [];
         $scope.agasFiltered = [];
         $scope.dataLoading = false;
@@ -96,14 +96,14 @@ angular.module('myApp', ['ngSanitize', 'ui.select', 'n3-line-chart'])
                     $scope.agas = data[1].data;
                     $scope.model.citySelected = $scope.loadCityFromStorage();
                     if (!$scope.model.citySelected) {
-                        $scope.model.citySelected = { "code": 3000, "name": "ירושלים" };
+                        $scope.model.citySelected = { "code": 2640, "name": "ראש העין" };
                     }
                     $scope.loadGraphData();
                     $scope.graphData = covidgraph.graphData;
                     $scope.getdata().then(function(data) {
 
                         if (!_agasFromStorage) {
-                            $scope.model.agasSelected = { "districts": "מרכז העיר", "agas_code": 842 };
+                            $scope.model.agasSelected = { "agas_code": "all", "districts": "כל השכונות" };
                         } else {
                             $scope.model.agasSelected = _agasFromStorage;
                             $scope.saveAgasToStorage(_agasFromStorage);
