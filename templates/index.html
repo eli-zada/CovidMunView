@@ -188,6 +188,18 @@
                     </div>
                 </div>
             </div>
+
+            <div ng-class="{'graph-hidden' : hideGraph}">
+                <div class="input-group mb-3 w-25 days-back-field" title="מספר הימים אחורה להצגת נתונים (מהיום) ">
+                    <input type="text" class="form-control text-center" aria-label="Default" aria-describedby="inputGroup-sizing-default" ng-change="loadGraphData()" ng-model-options="{ debounce: 500 }" ng-model="graphDaysBack">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">מספר ימים</span>
+                    </div>
+                </div>
+                <div class="my-chart">
+                    <linechart data="graphData[model.agasSelected.agas_code]" options="options"></linechart>
+                </div>
+            </div>
             <br>
             <br>
             <div class="comments-box">
@@ -201,17 +213,6 @@
                         <li>מספר החולים הפעילים אינו מדויק כאשר ערך סה"כ הנפטרים ו\או המחלימים נמוך מ-15</li>
                         <li>שדה המכיל את הערך "-" הוא שדה שלא התקבל מידע לגביו</li>
                     </ul>
-                </div>
-            </div>
-            <div ng-class="{'graph-hidden' : hideGraph}">
-                <div class="input-group mb-3 w-25 days-back-field" title="מספר הימים אחורה להצגת נתונים (מהיום) ">
-                    <input type="text" class="form-control text-center" aria-label="Default" aria-describedby="inputGroup-sizing-default" ng-change="loadGraphData()" ng-model-options="{ debounce: 500 }" ng-model="graphDaysBack">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">מספר ימים</span>
-                    </div>
-                </div>
-                <div class="my-chart">
-                    <linechart data="graphData[model.agasSelected.agas_code]" options="options"></linechart>
                 </div>
             </div>
         </main>
